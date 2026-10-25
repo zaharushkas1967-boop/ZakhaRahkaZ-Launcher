@@ -1,3 +1,3 @@
 # ZakhaRahkaZ-Launcher
 
-**Download the .exe file from GitHub and run it**
+**Download the launcher.exe file from GitHub and run it.**
