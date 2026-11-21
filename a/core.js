@@ -1,6 +1,11 @@
 'use strict';
-/* На GitHub Pages только страницы: аккаунты отвечают с сервера на Vercel */
-const BASE=/\.github\.io$/.test(location.hostname)?'https://zakharahkaz-launcher.vercel.app':'',SITE=BASE||location.origin,API=BASE+'/api/yggdrasil',ACC=BASE+'/api/account',KEY='zrz.session';
+/* Адреса сервера аккаунтов. Из России *.vercel.app открывается не у всех, поэтому есть зеркала на других входах Vercel */
+const MIRRORS=['https://zakharahkaz-76-76-21-21.my.local-ip.co','https://zakharahkaz-216-198-79-195.my.local-ip.co','https://zakharahkaz-launcher.vercel.app'];
+const ON_PAGES=/\.github\.io$/.test(location.hostname);
+const BASES=ON_PAGES?MIRRORS:['',...MIRRORS.filter(m=>m!==location.origin)];
+let BASE=BASES[0];try{const b=localStorage.getItem('zrz.base');if(b!==null&&BASES.includes(b))BASE=b}catch{}
+/* Адрес для команд серверам и authlib-injector: зеркало, которое открывается и из России */
+const SITE=MIRRORS[0],API='/api/yggdrasil',ACC='/api/account',KEY='zrz.session';
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const root=document.documentElement;
 try{const ua=navigator.userAgentData;if(ua&&ua.brands&&ua.brands.some(b=>/Chromium/.test(b.brand))&&!matchMedia('(prefers-reduced-motion: reduce)').matches)root.classList.add('refract')}catch(e){}
@@ -16,9 +21,15 @@ const forget=()=>{mem=null;try{localStorage.removeItem(KEY)}catch{}};
 function newToken(){const a=new Uint8Array(16);crypto.getRandomValues(a);return [...a].map(b=>b.toString(16).padStart(2,'0')).join('')}
 
 async function api(path,{method='POST',body,token}={}){
-  let r;
-  try{r=await fetch(path,{method,headers:{...(body!==undefined?{'Content-Type':'application/json'}:{}),...(token?{Authorization:'Bearer '+token}:{})},body:body===undefined?undefined:JSON.stringify(body),cache:'no-store'})}
-  catch{throw Object.assign(new Error('Нет связи с сервером. Проверьте интернет.'),{offline:true})}
+  const init={method,headers:{...(body!==undefined?{'Content-Type':'application/json'}:{}),...(token?{Authorization:'Bearer '+token}:{})},body:body===undefined?undefined:JSON.stringify(body),cache:'no-store'};
+  let r=null;
+  /* Адрес, который ответил в прошлый раз, затем остальные: зависший или сброшенный вход пропускаем */
+  for(const base of [BASE,...BASES.filter(b=>b!==BASE)]){
+    try{r=await fetch(base+path,{...init,signal:AbortSignal.timeout?AbortSignal.timeout(15000):undefined})}catch{continue}
+    if(base!==BASE){BASE=base;try{localStorage.setItem('zrz.base',base)}catch{}}
+    break;
+  }
+  if(!r)throw Object.assign(new Error('Нет связи с сервером. Проверьте интернет.'),{offline:true});
   if(r.status===204)return null;
   let data=null;try{data=await r.json()}catch{}
   if(!r.ok)throw Object.assign(new Error(data?.errorMessage||`Ошибка сервера (${r.status}). Попробуйте позже.`),{status:r.status,badToken:r.status===403&&/Сессия недействительна/.test(data?.errorMessage||'')});
