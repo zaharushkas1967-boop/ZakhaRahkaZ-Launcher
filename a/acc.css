@@ -1,0 +1,46 @@
+/* Аккаунт */
+.acc-head{padding:44px 0 26px;max-width:720px}
+.acc-sec{padding:10px 0 40px}
+.authbox{max-width:440px;padding:26px}
+.tabs{display:flex;gap:6px;margin-bottom:20px;position:relative;z-index:3}
+.tabs button{flex:1;padding:10px 14px;border-radius:999px;border:1px solid transparent;background:rgba(255,255,255,.05);color:var(--soft);font:700 14.5px 'Manrope',sans-serif;cursor:pointer;transition:color .2s,background .2s}
+.tabs button:hover{color:var(--text)}
+.tabs button.on{color:var(--on);border-color:rgba(255,255,255,.22);background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,0) 55%),linear-gradient(100deg,var(--accent),var(--accent2));box-shadow:inset 0 1px 1px rgba(255,255,255,.55)}
+form{display:flex;flex-direction:column;gap:12px;position:relative;z-index:3}
+label{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:13.5px;color:var(--soft)}
+input:not([type=radio]):not([type=file]){font:500 15.5px 'Manrope',sans-serif;color:var(--text);padding:12px 14px;border-radius:var(--rb);border:1px solid var(--line);background:rgba(0,0,0,.28);box-shadow:inset 0 1px 3px rgba(0,0,0,.4);outline:none;transition:border-color .2s,box-shadow .2s}
+input:not([type=radio]):not([type=file]):focus{border-color:rgba(var(--rgb),.8);box-shadow:inset 0 1px 3px rgba(0,0,0,.4),0 0 0 3px rgba(var(--rgb),.25)}
+.hint{color:var(--soft);font-size:12.5px;margin-top:-4px}
+.err{color:#ff9a8a;font-weight:700;font-size:14px;min-height:0}.err:empty{display:none}
+form .btn{align-self:flex-start;margin-top:4px}
+.cab{display:grid;grid-template-columns:1fr 1.25fr;gap:16px;align-items:start}
+.cab .card{position:relative;z-index:1}.cab .card>*{position:relative;z-index:3}
+.cab .card:last-child{grid-column:1}
+.wardrobe{grid-row:span 3}
+.cab h3{font-size:18px;margin-bottom:14px}
+.who-top{display:flex;gap:16px;align-items:center;margin-bottom:18px}
+.who h2{font-size:24px;overflow-wrap:anywhere}
+.avatar{width:64px;height:64px;border-radius:var(--rb);overflow:hidden;flex:none;background:rgba(255,255,255,.08);box-shadow:inset 0 1px 1px rgba(255,255,255,.25),0 0 0 1px var(--line)}
+.avatar canvas{width:100%;height:100%;image-rendering:pixelated;display:block}
+.dim{color:var(--soft)}.small{font-size:13px}
+.hash.inline{display:inline;padding:3px 8px;flex:none;min-width:0}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.row .btn{font-size:14px;padding:10px 16px}
+.views{display:flex;gap:18px;justify-content:center;padding:16px;border-radius:var(--r);background:radial-gradient(90% 90% at 50% 20%,rgba(var(--rgb),.18),transparent 70%),rgba(0,0,0,.22);box-shadow:inset 0 1px 3px rgba(0,0,0,.35)}
+.views figure{margin:0;text-align:center}.views canvas{width:120px;height:240px;image-rendering:pixelated;display:block}
+.views figcaption{color:var(--soft);font-size:12.5px;font-weight:700;margin-top:8px}
+.model{display:flex;gap:8px;margin-top:14px}
+.model label{flex-direction:row;cursor:pointer}.model input{position:absolute;opacity:0;pointer-events:none}
+.model span{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.06);box-shadow:inset 0 1px 1px rgba(255,255,255,.15);color:var(--soft);font-weight:700;font-size:13.5px;transition:background .2s,color .2s}
+.model input:checked+span{color:var(--on);background:rgba(var(--rgb),.5);box-shadow:inset 0 0 0 1px rgba(var(--rgb),.9),inset 0 1px 1px rgba(255,255,255,.4)}
+.model input:focus-visible+span{outline:2px solid #fff;outline-offset:2px}
+.busy{opacity:.55;pointer-events:none}
+.lnk{color:var(--text);text-decoration:underline;text-underline-offset:3px}
+.code{position:relative;margin:8px 0 6px}
+.code code{display:block;white-space:pre-wrap;word-break:break-all;font:12.5px/1.5 'Consolas',monospace;color:#ffe3cc;padding:12px 12px 44px;border-radius:var(--rb);background:rgba(0,0,0,.32);box-shadow:inset 0 1px 3px rgba(0,0,0,.45)}
+.code .copy{position:absolute;right:8px;bottom:8px;padding:6px 12px;font-size:12.5px}
+#servers .steps .card p{color:var(--soft)}
+#servers code:not(.code code){font-family:'Consolas',monospace;color:#ffe3cc}
+@media(max-width:900px){.cab{grid-template-columns:1fr}.wardrobe{grid-row:auto}.cab .card:last-child{grid-column:auto}}
+@media(max-width:560px){.authbox{padding:20px}.views{gap:10px}.views canvas{width:100px;height:200px}}
+.btn:disabled{opacity:.42;cursor:default;transform:none!important}

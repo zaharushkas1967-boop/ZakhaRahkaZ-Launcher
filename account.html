@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang='ru'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Аккаунт ZakhaRahkaZ — ник, скин и плащ для серверов</title>
+<meta name='description' content='Бесплатный игровой аккаунт ZakhaRahkaZ: ник и пароль, свой скин и плащ, которые видят другие игроки на серверах с аккаунтами ZakhaRahkaZ.'>
+<meta name='theme-color' content='#0c0805'>
+<link rel='icon' href='favicon.svg'>
+<link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;700&display=swap'>
+<link rel='stylesheet' href='a/base.css'><link rel='stylesheet' href='a/layout.css'><link rel='stylesheet' href='a/acc.css'><link rel='stylesheet' href='a/more.css'>
+</head>
+<body>
+<svg width='0' height='0' style='position:absolute' aria-hidden='true'><filter id='lgf' x='0%' y='0%' width='100%' height='100%' color-interpolation-filters='sRGB'><feTurbulence type='fractalNoise' baseFrequency='0.012 0.018' numOctaves='2' seed='11' result='n'/><feGaussianBlur in='n' stdDeviation='3' result='nb'/><feDisplacementMap in='SourceGraphic' in2='nb' scale='30' xChannelSelector='R' yChannelSelector='G'/></filter></svg>
+<div class='bg'><i></i><i></i><i></i></div>
+<nav><div class='bar lg'><a class='brand' href='./'><img src='favicon.svg' alt=''>ZakhaRahkaZ <small>аккаунт</small></a><div class='links'><a href='./'>Лаунчер</a><a href='#servers'>Для серверов</a></div><a class='btn primary' href='./#install'>Скачать</a></div></nav>
+<main class='wrap'>
+
+<section class='acc-head'>
+<span class='eyebrow lg'>Аккаунт ZakhaRahkaZ</span>
+<h1>Один ник для <em>всех</em> серверов</h1>
+<p class='lead'>Бесплатный аккаунт для игры: ник, пароль, ваш скин и плащ. Их видят другие игроки на серверах, подключённых к аккаунтам ZakhaRahkaZ. Лицензия Minecraft не нужна.</p>
+</section>
+
+<!-- Вход и регистрация -->
+<section id='auth' class='acc-sec' hidden>
+<div class='card lg authbox'>
+<div class='tabs' role='tablist'><button type='button' data-tab='login' class='on' role='tab'>Вход</button><button type='button' data-tab='register' role='tab'>Регистрация</button></div>
+<form id='authform' novalidate>
+<label>Ник<input id='f-name' name='username' autocomplete='username' maxlength='16' spellcheck='false' autocapitalize='off' required></label>
+<p class='hint' data-only='register'>От 3 до 16 символов: латинские буквы, цифры и _. Сменить ник потом нельзя.</p>
+<label>Пароль<input id='f-pass' name='password' type='password' autocomplete='current-password' maxlength='100' required></label>
+<button type='button' class='linkbtn' id='forgot' data-only='login'>Забыли пароль?</button>
+<label data-only='register'>Пароль ещё раз<input id='f-pass2' type='password' autocomplete='new-password' maxlength='100'></label>
+<p class='hint' data-only='register'>Не короче 6 символов. Чтобы пароль можно было восстановить, после регистрации привяжите почту или Telegram.</p>
+<p class='err' id='autherr' role='alert'></p>
+<button class='btn primary big' id='authbtn' type='submit'>Войти</button>
+</form>
+</div>
+</section>
+
+<!-- Восстановление пароля -->
+<section id='recover' class='acc-sec' hidden>
+<div class='card lg authbox'>
+<h3 class='boxtitle'>Восстановление пароля</h3>
+<form id='rform1' novalidate>
+<p class='dim small'>Введите ник, привязанную почту или номер телефона из Telegram. Мы пришлём код.</p>
+<label>Ник, почта или номер<input id='r-login' autocomplete='username' maxlength='254' spellcheck='false' autocapitalize='off'></label>
+<p class='err' id='r1err' role='alert'></p>
+<button class='btn primary big' type='submit'>Получить код</button>
+</form>
+<form id='rform2' novalidate hidden>
+<p class='sent' id='r-sent'></p>
+<label>Код<input id='r-code' inputmode='numeric' autocomplete='one-time-code' maxlength='14' placeholder='6 цифр'></label>
+<label>Новый пароль<input id='r-new' type='password' autocomplete='new-password' maxlength='100'></label>
+<label>Новый пароль ещё раз<input id='r-new2' type='password' autocomplete='new-password' maxlength='100'></label>
+<p class='err' id='r2err' role='alert'></p>
+<button class='btn primary big' type='submit'>Сменить пароль</button>
+<button class='linkbtn' type='button' id='r-again'>Отправить код ещё раз</button>
+</form>
+<button class='linkbtn back' type='button' id='r-back'>← Назад ко входу</button>
+</div>
+</section>
+
+<!-- Кабинет -->
+<section id='cab' class='acc-sec' hidden>
+<div class='cab'>
+<div class='card lg who'>
+<div class='who-top'><div class='avatar' id='avatar'><canvas width='8' height='8'></canvas></div><div><h2 id='c-name'></h2><p class='dim' id='c-since'></p></div></div>
+<p class='dim small'>UUID</p><div class='hash' id='c-uuid'></div>
+<p class='dim small' style='margin-top:14px'>Войти в лаунчере: «Аккаунт» → «Аккаунт ZakhaRahkaZ» с этим ником и паролем.</p>
+<div class='row' style='margin-top:18px'><button class='btn' id='logout' type='button'>Выйти</button><button class='btn' id='logoutall' type='button' title='Завершить сессии в лаунчере и в браузерах'>Выйти везде</button></div>
+</div>
+
+<div class='card lg' id='contacts'>
+<h3>Восстановление пароля</h3>
+<p class='dim small'>Привяжите почту или Telegram: если забудете пароль, код придёт туда.</p>
+<div id='ct-body'><p class='dim small'>Загрузка…</p></div>
+</div>
+
+<div class='card lg wardrobe'>
+<h3>Скин и плащ</h3>
+<div class='views'><figure><canvas id='v-front' width='160' height='320'></canvas><figcaption>Спереди</figcaption></figure><figure><canvas id='v-back' width='160' height='320'></canvas><figcaption>Сзади</figcaption></figure></div>
+<div class='model' role='radiogroup' aria-label='Модель'>
+<label><input type='radio' name='model' value='classic' checked><span>Классическая</span></label>
+<label><input type='radio' name='model' value='slim'><span>Тонкие руки</span></label>
+</div>
+<div class='row'><label class='btn primary'>Загрузить скин<input type='file' id='skinfile' accept='image/png' hidden></label><button class='btn' id='skindel' type='button'>Удалить скин</button></div>
+<div class='row'><label class='btn'>Загрузить плащ<input type='file' id='capefile' accept='image/png' hidden></label><button class='btn' id='capedel' type='button'>Убрать плащ</button></div>
+<p class='hint'>Скин: PNG 64×64 или 64×32 (HD до 512×512). Плащ: PNG 64×32 (или 128×64, 256×128). До 256 КБ.</p>
+</div>
+
+<div class='card lg'>
+<h3>Сменить пароль</h3>
+<form id='pwform' novalidate>
+<label>Текущий пароль<input id='p-old' type='password' autocomplete='current-password' maxlength='100'></label>
+<label>Новый пароль<input id='p-new' type='password' autocomplete='new-password' maxlength='100'></label>
+<label>Новый пароль ещё раз<input id='p-new2' type='password' autocomplete='new-password' maxlength='100'></label>
+<p class='err' id='pwerr' role='alert'></p>
+<button class='btn primary' type='submit'>Сменить пароль</button>
+<p class='hint'>После смены пароля лаунчер и другие браузеры попросят войти заново.</p>
+</form>
+</div>
+</div>
+</section>
+
+<section id='loading' class='acc-sec'><p class='dim'>Загрузка…</p></section>
+
+<!-- Владельцам серверов -->
+<section id='servers'>
+<h2 class='rv'>Свой сервер с аккаунтами ZakhaRahkaZ</h2>
+<p class='sub rv'>Сервер проверяет, что игрок вошёл в свой аккаунт, а все видят настоящие скины и плащи. Игроки заходят через ZakhaRahkaZ лаунчер с аккаунтом ZakhaRahkaZ.</p>
+<div class='steps'>
+<div class='card lg rv'><span class='num'>1</span><h3>Скачайте authlib-injector</h3><p>Возьмите последний <b>authlib-injector.jar</b> на <a class='lnk' href='https://github.com/yushijinhun/authlib-injector/releases' target='_blank' rel='noopener'>GitHub</a> и положите рядом с ядром сервера.</p></div>
+<div class='card lg rv'><span class='num'>2</span><h3>Запускайте с ним</h3><p>Команда запуска сервера: флаг <code>-javaagent</code> идёт перед <code>-jar</code>.</p><div class='code'><code id='cmd1'></code><button class='btn copy' type='button' data-copy='cmd1'>Копировать</button></div><p class='small dim'>Для серверов 26.x добавьте ещё:</p><div class='code'><code id='cmd2'></code><button class='btn copy' type='button' data-copy='cmd2'>Копировать</button></div></div>
+<div class='card lg rv'><span class='num'>3</span><h3>server.properties</h3><p>Включите проверку игроков:</p><div class='code'><code id='cmd3'>online-mode=true
+enforce-secure-profile=false</code><button class='btn copy' type='button' data-copy='cmd3'>Копировать</button></div></div>
+</div>
+<p class='sub small rv' style='margin-top:18px'>Адрес API для лаунчеров с поддержкой authlib-injector (HMCL, PCL, Prism и др.): <span class='hash inline' id='apiurl'></span></p>
+</section>
+</main>
+<footer><div class='wrap'><div><div class='brand'><img src='favicon.svg' alt=''>ZakhaRahkaZ <small>аккаунт</small></div></div><p>Аккаунты ZakhaRahkaZ не связаны с Mojang Studios и Microsoft и не дают доступа к лицензионным серверам. Minecraft — торговая марка Mojang Studios.</p></div></footer>
+<script src='a/core.js'></script><script src='a/skin.js'></script><script src='a/cab.js'></script><script src='a/recover.js'></script><script src='a/contacts.js'></script>
+<script>if(location.hash==='#recover')showRecover('');else if(session())openCabinet();else showAuth(location.hash==='#register'?'register':'login');</script>
+</body>
+</html>
