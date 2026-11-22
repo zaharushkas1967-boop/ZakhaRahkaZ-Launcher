@@ -8,10 +8,8 @@ let BASE=BASES[0];try{const b=localStorage.getItem('zrz.base');if(b!==null&&BASE
 const SITE=MIRRORS[0],API='/api/yggdrasil',ACC='/api/account',KEY='zrz.session';
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const root=document.documentElement;
-try{const ua=navigator.userAgentData;if(ua&&ua.brands&&ua.brands.some(b=>/Chromium/.test(b.brand))&&!matchMedia('(prefers-reduced-motion: reduce)').matches)root.classList.add('refract')}catch(e){}
 function toast(t){$$('.toast').forEach(x=>x.remove());const e=document.createElement('div');e.className='toast lg';e.textContent=t;document.body.append(e);setTimeout(()=>e.remove(),5200)}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});$$('.rv').forEach(e=>io.observe(e));
-document.addEventListener('pointermove',e=>{const el=e.target.closest&&e.target.closest('.lg,.btn');if(!el)return;const r=el.getBoundingClientRect();el.style.setProperty('--mx',(e.clientX-r.left)+'px');el.style.setProperty('--my',(e.clientY-r.top)+'px')},{passive:true});
 
 /* Сессия: в localStorage этого сайта; если хранилище недоступно, держим в памяти до закрытия вкладки */
 let mem=null;
