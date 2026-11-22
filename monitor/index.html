@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang='ru'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='referrer' content='no-referrer'>
+<title>ZakhaRahkaZ — мониторинг аккаунтов</title>
+<meta name='theme-color' content='#0c0805'>
+<link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;700&display=swap'>
+<link rel='stylesheet' href='s.css'>
+</head>
+<body>
+<div class='bg'><i></i><i></i></div>
+
+<section id='login'>
+  <form class='lbox lg' id='loginform'>
+    <h1><span class='logo'>Z</span> Мониторинг</h1>
+    <p>Панель администратора ZakhaRahkaZ. Введите пароль администратора.</p>
+    <input id='pw' type='password' placeholder='Пароль администратора' autocomplete='current-password' autofocus>
+    <p class='err' id='lerr'></p>
+    <button class='btn primary' id='lbtn' type='submit'>Войти</button>
+  </form>
+</section>
+
+<main id='dash' class='wrap' hidden>
+  <header class='top'>
+    <h1><span class='logo'>Z</span> Мониторинг</h1>
+    <div class='right'>
+      <span class='muted' id='updated'></span>
+      <button class='btn' id='refresh' type='button'>Обновить</button>
+      <button class='btn' id='logout' type='button'>Выйти</button>
+    </div>
+  </header>
+  <nav class='tabs'>
+    <button class='tab on' type='button' data-tab='users'>Аккаунты</button>
+    <button class='tab' type='button' data-tab='release'>Лаунчер</button>
+  </nav>
+  <section id='users-tab'>
+  <div class='stats'>
+    <div class='stat lg'><b id='s-total'>—</b><span>всего аккаунтов</span></div>
+    <div class='stat lg'><b id='s-skin'>—</b><span>со скином</span></div>
+    <div class='stat lg'><b id='s-cape'>—</b><span>с плащом</span></div>
+    <div class='stat lg'><b id='s-lock'>—</b><span>заблокировано</span></div>
+  </div>
+  <div class='toolbar'>
+    <input class='search' id='search' type='search' placeholder='Поиск по нику…' autocomplete='off'>
+    <span class='muted' id='shown'></span>
+  </div>
+  <div class='grid' id='grid'></div>
+  <div class='empty' id='state'></div>
+  </section>
+
+  <section id='release-tab' hidden>
+    <div class='relgrid'>
+      <div class='panel lg'>
+        <h2>Сейчас на сайтах и в лаунчерах</h2>
+        <div id='rel-now' class='relnow'><span class='spin'></span> Загрузка…</div>
+      </div>
+      <form class='panel lg' id='relform' autocomplete='off'>
+        <h2>Новая версия</h2>
+        <p class='muted'>Загрузите установщик на Google Диск, откройте доступ «Все, у кого есть ссылка» и вставьте ссылку. Сервер скачает файл, проверит его и посчитает контрольную сумму. После публикации сайты сразу покажут новую версию, а лаунчеры скачают её сами и установят.</p>
+        <label>Ссылка на установщик в Google Диске
+          <input id='r-link' type='url' inputmode='url' placeholder='https://drive.google.com/file/d/…/view' required></label>
+        <label>Версия <span class='muted'>— если её нет в имени файла (например ZakhaRahkaZ-Launcher-1.5.3.exe)</span>
+          <input id='r-ver' placeholder='из имени файла' maxlength='14'></label>
+        <label>Что нового <span class='muted'>— по пункту в строке</span>
+          <textarea id='r-log' rows='6'></textarea></label>
+        <p class='err' id='r-err'></p>
+        <p class='muted' id='r-busy' hidden><span class='spin'></span> Проверяю файл: скачиваю с Google Диска и считаю контрольную сумму. Это займёт до минуты…</p>
+        <button class='btn primary' id='r-btn' type='submit'>Опубликовать</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<script src='skin.js'></script>
+<script src='app.js'></script>
+<script src='release.js'></script>
+</body>
+</html>
